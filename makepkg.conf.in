@@ -45,7 +45,9 @@ CFLAGS="@CARCHFLAGS@-O2 -pipe -fstack-protector-strong -fno-plt"
 CXXFLAGS="@CARCHFLAGS@-O2 -pipe -fstack-protector-strong -fno-plt"
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 #-- Make Flags: change this for DistCC/SMP systems
-#MAKEFLAGS="-j2"
+# devtools-alarm clear this explicitly so we need to pass it through
+# using a different name...
+MAKEFLAGS="${MAKEFLAGS:-${MAKEFLAGS_saved}}"
 #-- Debugging flags
 DEBUG_CFLAGS="-g -fvar-tracking-assignments"
 DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"

@@ -8,14 +8,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}"
 include(GNUInstallDirs)
 
 function(install_build_script cmd)
-  add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${cmd}"
-    COMMAND "${CMAKE_COMMAND}" -E make_directory
-    "${CMAKE_CURRENT_BINARY_DIR}"
-    COMMAND "${CMAKE_COMMAND}" -E create_symlink archbuild
-    "${CMAKE_CURRENT_BINARY_DIR}/${cmd}")
-  add_custom_target(${cmd}.target ALL
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${cmd}")
-  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${cmd}"
+  configure_file(archbuild.py "${cmd}" COPYONLY)
+  install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/${cmd}"
     DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endfunction()
 
