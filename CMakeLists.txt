@@ -8,7 +8,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}"
 include(GNUInstallDirs)
 
 function(install_build_script cmd)
-  configure_file(archbuild.py "${cmd}" COPYONLY)
+  configure_file(archbuild.sh "${cmd}" COPYONLY)
   install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/${cmd}"
     DESTINATION "${CMAKE_INSTALL_BINDIR}")
 endfunction()
