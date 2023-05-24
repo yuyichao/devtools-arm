@@ -21,12 +21,14 @@ endfunction()
 
 function(install_arch CARCH CHOST CARCHFLAGS)
   install_build_script("extra-${CARCH}-build")
-  configure_file(pacman-extra.conf.in "pacman-extra-${CARCH}.conf" @ONLY)
-  configure_file(makepkg.conf.in "makepkg-${CARCH}.conf" @ONLY)
+  configure_file(pacman-extra.conf.in "extra-${CARCH}.conf" @ONLY)
+  configure_file(makepkg.conf.in "${CARCH}.conf" @ONLY)
   install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/pacman-extra-${CARCH}.conf"
-    "${CMAKE_CURRENT_BINARY_DIR}/makepkg-${CARCH}.conf"
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/devtools/")
+    "${CMAKE_CURRENT_BINARY_DIR}/extra-${CARCH}.conf"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/devtools/pacman.conf.d/")
+  install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/${CARCH}.conf"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/devtools/makepkg.conf.d/")
 endfunction()
 
 install_arch(arm armv5tel-unknown-linux-gnueabi "-march=armv5te ")
